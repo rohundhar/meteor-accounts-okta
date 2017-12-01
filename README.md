@@ -5,7 +5,7 @@ __A login service for Okta accounts__
 
 Add the package to meteor
 ```javascript
-meteor add vurankar:accounts-okta
+meteor add riffyn:accounts-okta
 ```
 
 ## Basic usage
@@ -52,5 +52,5 @@ var options = {
 
 ### OAuth package
 
-* [vurankar:okta](https://github.com/vurankar/meteor-okta)
+* [riffyn:okta](https://github.com/RiffynInc/meteor-okta)
 
