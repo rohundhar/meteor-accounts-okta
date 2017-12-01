@@ -41,8 +41,8 @@ oauth2@1.1.5
 observe-sequence@1.0.7
 ordered-dict@1.0.4
 promise@0.5.1
-vurankar:accounts-okta@0.1.0
-vurankar:okta@0.1.0
+riffyn:accounts-okta@0.1.0
+riffyn:okta@0.1.0
 random@1.0.5
 rate-limit@1.0.0
 reactive-var@1.0.6
