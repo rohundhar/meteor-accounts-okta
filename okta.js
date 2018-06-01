@@ -19,8 +19,8 @@ if (Meteor.isClient){
     }
 
     if (typeof Accounts._options.restrictCreationByEmailDomain === 'string') {
-      options = _.extend({}, options || {});
-      options.loginUrlParameters = _.extend({}, options.loginUrlParameters || {});
+      options = options ? { ...options } : {};
+      options.loginUrlParameters = options.loginUrlParameters ? { ...options.loginUrlParameters } : {};
       options.loginUrlParameters.hd = Accounts._options.restrictCreationByEmailDomain;
     }
 
@@ -36,17 +36,19 @@ if (Meteor.isClient){
    multiple publishes since DDP only merges only across top-level
    fields, not subfields (such as 'services.okta.accessToken')
    */
+  const whitelistedFields = Okta.whitelistedFields.filter(function (f) { return f !== 'emails'; });
   Accounts.addAutopublishFields({
 
-    forLoggedInUser: _.map(
+    forLoggedInUser:
       // publish access token since it can be used from the client
-      Okta.whitelistedFields.concat(['accessToken', 'expiresAt']), // don't publish refresh token
-      function (subfield) { return 'services.okta.' + subfield; }),
+      Okta.whitelistedFields.concat(['accessToken', 'expiresAt']).map( // don't publish refresh token
+      function (subfield) { return 'services.okta.' + subfield; }
+    ),
 
-    forOtherUsers: _.map(
+    forOtherUsers:
       // even with autopublish, no legitimate web app should be
       // publishing all users' emails
-      _.without(Okta.whitelistedFields, 'emails'),
+      whitelistedFields.map(
       function (subfield) { return 'services.okta.' + subfield; })
   });
 
