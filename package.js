@@ -1,8 +1,8 @@
 Package.describe({
-  name: 'riffyn:accounts-okta',
-  version: '0.1.0',
+  name: 'roni:accounts-okta',
+  version: '1.0',
   summary: 'Meteor login service for Okta accounts.',
-  git: 'https://github.com/RiffynInc/meteor-accounts-okta',
+  git: 'https://github.com/rohundhar/meteor-accounts-okta',
   documentation: 'README.md'
 });
 
@@ -13,7 +13,7 @@ Package.onUse(function(api) {
   // Export Accounts (etc) to packages using this one.
   api.imply('accounts-base', ['client', 'server']);
   api.use('accounts-oauth', ['client', 'server']);
-  api.use('riffyn:okta@0.1.0', ['client', 'server']);
+  api.use('roni:okta@1.0', ['client', 'server']);
 
   api.addFiles('okta.js');
 
