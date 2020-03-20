@@ -24,19 +24,18 @@ if (Meteor.isClient){
       options.loginUrlParameters.hd = Accounts._options.restrictCreationByEmailDomain;
     }
 
-    var credentialRequestCompleteCallback = Accounts.oauth.credentialRequestCompleteHandler(callback);
+    const credentialRequestCompleteCallback = Accounts.oauth.credentialRequestCompleteHandler(callback);
     Okta.requestCredential(options, credentialRequestCompleteCallback);
   };
 
 }else{
 
-  /**
-   If autopublish is on, publish these user fields. Login service
-   packages (eg accounts-google). Notably, this isn't implemented with
-   multiple publishes since DDP only merges only across top-level
-   fields, not subfields (such as 'services.okta.accessToken')
-   */
-  const whitelistedFields = Okta.whitelistedFields.filter(function (f) { return f !== 'emails'; });
+  // Since autopublish is OFF on this application for most dev and production work, this does not
+  // apply. However, if you choose to re-enable autopublish, then you can use the access token 
+  // from the client side. 
+  const whitelistedFields = Okta.whitelistedFields.filter( (field) => field !== 'emails');
+
+
   Accounts.addAutopublishFields({
 
     forLoggedInUser:

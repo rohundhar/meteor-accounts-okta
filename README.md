@@ -3,7 +3,7 @@ __A login service for Okta accounts__
 
 ## Getting started
 
-Add the package to meteor
+Add the package to meteor (cannot add it yet because it is not published anywhere)
 ```javascript
 meteor add roni:accounts-okta
 ```
